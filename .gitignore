@@ -1,0 +1,13 @@
+.env
+.venv/
+venv/
+pycache/
+*.pyc
+logs/
+data_lake/car_sales_data/*.csv
+plugins/
+code/transform/dbt_project/target/
+code/transform/dbt_project/dbt_packages/
+code/transform/dbt_project/logs/
+code/transform/dbt_project/.user.yml
+.vscode/
