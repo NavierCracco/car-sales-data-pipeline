@@ -2,6 +2,13 @@ WITH source AS (
     SELECT
         *
     FROM {{ source('raw_bi_car', 'CAR_SALES') }}
+
+    {% if 'CI' in target.schema.upper() %}
+
+        -- In CI environment, limit rows for faster runs
+        LIMIT 1000
+
+    {% endif %}
 ),
 
 renamed AS (

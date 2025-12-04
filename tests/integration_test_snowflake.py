@@ -25,17 +25,17 @@ class TestSnowflakeIntegration(unittest.TestCase):
         self.test_table = f'CI_TEST_{datetime.now().strftime("%Y%m%d_%H%M%S")}'
 
         self.df_mock = pd.DataFrame({
-            'DATE': ['2018-04-23 00:00:00', '2019-08-02 00:00:00'],
-            'SALESPERSON': ['Linda White', 'David Miller'],
-            'CUSTOMERNAME': ['Pamela Sullivan', 'John Doe'],
-            'CARMAKE': ['Ford', 'Toyota'],
-            'CARMODEL': ['Altima', 'Corolla'],
-            'CARYEAR': ['2018', '2019'],
-            'SALEPRICE': ['48314', '25000'],
-            'COMMISSIONRATE': ['0.1468097182384521', '0.1200000000000000'],
-            'COMMISSIONEARNED': ['7092.96', '3000.00'],
-            '_SOURCE_FILE': ['car_sales_data_2018_4.csv', 'car_sales_data_2018_4.csv'],
-            '_LOADED_AT': [datetime.now().strftime('%Y-%m-%d %H:%M:%S')] * 2  
+            'sale_date': ['2018-04-23 00:00:00', '2019-08-02 00:00:00'],
+            'sales_person': ['Linda White', 'David Miller'],
+            'customer_name': ['Pamela Sullivan', 'John Doe'],
+            'car_make': ['Ford', 'Toyota'],
+            'car_model': ['Altima', 'Corolla'],
+            'car_year': ['2018', '2019'],
+            'sale_price': ['48314', '25000'],
+            'comm_rate': ['0.1468097182384521', '0.1200000000000000'],
+            'comm_earned': ['7092.96', '3000.00'],
+            'source_file': ['car_sales_data_2018_4.csv', 'car_sales_data_2018_4.csv'],
+            'loaded_at': [datetime.now().strftime('%Y-%m-%d %H:%M:%S')] * 2  
         })
     
     def test_connection_and_write(self):
