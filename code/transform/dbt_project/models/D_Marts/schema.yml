@@ -1,0 +1,64 @@
+models:
+  - name: fct_car_sales
+    description: "Central transactional fact table. Contains metrics and foreign keys."
+    columns:
+      - name: sale_id
+        description: "Primary key of the transaction (Hash)."
+        tests:
+          - unique
+          - not_null
+
+      - name: car_id
+        description: "Foreign key to the car dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_cars')
+                field: car_id
+
+      - name: sales_person_id
+        description: "Foreign key to the sales person dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_salespeople')
+                field: sales_person_id
+
+      - name: sale_price
+        description: "Final sale amount."
+        tests:
+          - not_null 
+    
+  - name: dim_cars
+    description: "Dimension that contains the unique catalog of sold cars."
+    columns:
+      - name: car_id
+        description: "Primary key. Unique Hash based on Make + Model + Year."
+        tests:
+          - unique
+          - not_null
+      
+      - name: car_make
+        description: "Manufacturer of the car."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Nissan', 'BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen']
+              config:
+                severity: warn
+  
+  - name: dim_salespeople
+    description: "Dimension that contains the unique sales force list."
+    columns:
+      - name: sales_person_id
+        description: "Primary key. Unique Hash of the sales person."
+        tests:
+          - unique
+          - not_null
+      
+      - name: sales_person
+        description: "Full name of the sales person."
+        tests:
+          - not_null
