@@ -64,7 +64,7 @@ jobs:
         
       - name: Install DBT
         run: |
-          pip install dbt-core==1.10.15 dbt-snowflake==1.10.15
+          pip install dbt-core==1.10.15 dbt-snowflake==1.10.3
 
       - name: Install dependencies of the dbt project
         run: |
