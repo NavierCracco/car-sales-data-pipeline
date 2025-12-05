@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: raw_bi_car
+    description: "Raw data source for car sales."
+    database: CAR_SALES_DB
+    schema: RAW
+    tables:
+      - name: CAR_SALES
+        description: "Table containing car sales data."
+
+        quoting:
+          database: false
+          schema: false
+          identifier: false
+          column: true
+
+        columns:
+          - name: "Sale Price"
+            description: "Sale price of the car."
+            test:
+              - not_null
+          - name: "Date"
+            description: "Date of the sale."
+          - name: "Car Make"
+            description: "Make of the car sold."

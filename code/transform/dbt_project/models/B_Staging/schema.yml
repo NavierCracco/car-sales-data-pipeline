@@ -1,0 +1,47 @@
+models:
+  - name: stg_car_sales
+    description: "Staging table for car sales data."
+    columns:
+      - name: sale_date
+        description: "The date when the car was sold."
+        tests:
+          - not_null
+      
+      - name: sales_person
+        description: "Full name of seller."
+        tests:
+          - not_null
+      
+      - name: customer_name
+        description: "Full name of the customer."
+        tests:
+          - not_null
+      
+      - name: car_make
+        description: "The make of the car (e.g., Toyota, Ford)."
+        tests:
+          - not_null
+      
+      - name: car_model
+        description: "Specific model of the car."
+        tests:
+          - not_null
+
+      - name: car_year
+        description: "The year the car was manufactured."
+        tests:
+          - not_null
+      
+      - name: sale_price
+        description: "Final price of the car."
+        tests:
+          - not_null
+      
+      - name: comm_rate
+        description: "Average commission applied to the sale (decimal format, e.g.: 0.15)."
+      
+      - name: comm_earned
+        description: "Total commission earned from the sale."
+      
+      - name: source_file
+        description: "Name of the source CSV file from which this record originated."

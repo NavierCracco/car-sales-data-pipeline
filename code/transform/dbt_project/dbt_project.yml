@@ -18,9 +18,13 @@ clean-targets:
 
 models:
   car_sales_project:
-    staging:
+    B_Staging:
       +materialized: view
-    intermediate:
-      +materialized: table
-    marts:
-      +materialized: table
+      +schema: staging
+
+    C_Intermediate:
+      +materialized: view
+      +schema: intermediate
+
+    D_Marts:
+      +schema: marts

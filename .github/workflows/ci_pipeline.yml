@@ -2,7 +2,9 @@ name: Data Pipeline Integration CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - NavierCracco-dev
   pull_request:
     branches: [ main ]
 
@@ -36,3 +38,45 @@ jobs:
       - name: Run integration test
         run: |
           python tests/integration_test_snowflake.py
+  
+  dbt-quality-check:
+    runs-on: ubuntu-latest
+    needs: integration-test-snowflake
+
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_DATABASE: CAR_SALES_DB
+      SNOWFLAKE_SCHEMA: CI_DBT_TEST
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+          cache: 'pip'
+        
+      - name: Install DBT
+        run: |
+          pip install dbt-core==1.10.15 dbt-snowflake==1.10.3
+
+      - name: Install dependencies of the dbt project
+        run: |
+          cd code/transform/dbt_project
+          dbt deps
+      
+      - name: Verify Connection
+        run: |
+          cd code/transform/dbt_project
+          dbt debug --profiles-dir .
+      
+      - name: Build and test models
+        run: |
+          cd code/transform/dbt_project
+          dbt build --profiles-dir .

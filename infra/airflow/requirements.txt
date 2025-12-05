@@ -1,4 +1,5 @@
-dbt-core==1.8.0
-dbt-snowflake==1.8.0
+apache-airflow-providers-docker
+dbt-core==1.10.15
+dbt-snowflake==1.10.15
 snowflake-connector-python[pandas]==3.6.0
 apache-airflow-providers-snowflake
