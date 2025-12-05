@@ -27,6 +27,4 @@ models:
       +schema: intermediate
 
     D_Marts:
-      +materialized: incremental
       +schema: marts
-      +unique_key: 'sale_id'
