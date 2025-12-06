@@ -13,7 +13,13 @@ WITH source AS (
 
 renamed AS (
     SELECT
-        TRY_TO_DATE("Date", 'YYYY-MM-DD') AS sale_date,
+        COALESCE(
+            TRY_TO_DATE("Date", 'MM/DD/YYYY'),
+            TRY_TO_DATE("Date", 'YYYY-MM-DD HH24:MI:SS'),
+            TRY_TO_DATE("Date", 'YYYY-MM-DD'),
+            TRY_TO_DATE("Date", 'DD-MM-YYYY'),
+            TRY_TO_DATE("Date", 'DD/MM/YYYY')
+        ) AS sale_date,
 
         TRIM("Salesperson") AS sales_person,
         TRIM("Customer Name") AS customer_name,
