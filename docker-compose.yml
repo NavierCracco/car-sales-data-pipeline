@@ -91,5 +91,25 @@ services:
       - ./logs:/opt/airflow/logs
     entrypoint: /bin/bash -c "airflow scheduler"
 
+  streamlit-app:
+    build:
+      context: dashboard
+    container_name: streamlit_app
+    restart: always
+    ports:
+      - "8501:8501"
+    environment:
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE}
+      - SNOWFLAKE_DATABASE=${SNOWFLAKE_DATABASE}
+      - SNOWFLAKE_SCHEMA=${SNOWFLAKE_SCHEMA}
+    volumes:
+      - ./dashboard:/app
+    env_file:
+      - .env
+
 volumes:
   postgres_data:
