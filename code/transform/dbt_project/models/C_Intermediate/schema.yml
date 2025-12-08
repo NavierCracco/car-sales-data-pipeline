@@ -4,24 +4,24 @@ models:
     columns:
       - name: sale_id
         description: "Unique transaction hash key."
-        tests:
+        data_tests:
           - unique
           - not_null
       
       - name: sales_person_id
         description: "Hash key that identifies the sales person."
-        tests:
+        data_tests:
           - not_null
       
       - name: car_id
         description: "Hash key that identifies the car."
-        tests:
+        data_tests:
           - not_null
       
       - name: sale_date
-        tests:
+        data_tests:
           - not_null
       
       - name: sale_price
-        tests:
+        data_tests:
           - not_null

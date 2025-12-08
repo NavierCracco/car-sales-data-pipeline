@@ -4,37 +4,37 @@ models:
     columns:
       - name: sale_date
         description: "The date when the car was sold."
-        tests:
+        data_tests:
           - not_null
       
       - name: sales_person
         description: "Full name of seller."
-        tests:
+        data_tests:
           - not_null
       
       - name: customer_name
         description: "Full name of the customer."
-        tests:
+        data_tests:
           - not_null
       
       - name: car_make
         description: "The make of the car (e.g., Toyota, Ford)."
-        tests:
+        data_tests:
           - not_null
       
       - name: car_model
         description: "Specific model of the car."
-        tests:
+        data_tests:
           - not_null
 
       - name: car_year
         description: "The year the car was manufactured."
-        tests:
+        data_tests:
           - not_null
       
       - name: sale_price
         description: "Final price of the car."
-        tests:
+        data_tests:
           - not_null
       
       - name: comm_rate

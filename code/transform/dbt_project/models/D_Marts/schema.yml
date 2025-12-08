@@ -4,13 +4,13 @@ models:
     columns:
       - name: sale_id
         description: "Primary key of the transaction (Hash)."
-        tests:
+        data_tests:
           - unique
           - not_null
 
       - name: car_id
         description: "Foreign key to the car dimension."
-        tests:
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -19,7 +19,7 @@ models:
 
       - name: sales_person_id
         description: "Foreign key to the sales person dimension."
-        tests:
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -28,7 +28,7 @@ models:
 
       - name: sale_price
         description: "Final sale amount."
-        tests:
+        data_tests:
           - not_null 
     
   - name: dim_cars
@@ -36,13 +36,13 @@ models:
     columns:
       - name: car_id
         description: "Primary key. Unique Hash based on Make + Model + Year."
-        tests:
+        data_tests:
           - unique
           - not_null
       
       - name: car_make
         description: "Manufacturer of the car."
-        tests:
+        data_tests:
           - not_null
           - accepted_values:
               values: ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Nissan', 'BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen']
@@ -54,11 +54,11 @@ models:
     columns:
       - name: sales_person_id
         description: "Primary key. Unique Hash of the sales person."
-        tests:
+        data_tests:
           - unique
           - not_null
       
       - name: sales_person
         description: "Full name of the sales person."
-        tests:
+        data_tests:
           - not_null
