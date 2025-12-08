@@ -31,7 +31,7 @@ renamed AS (
         TRY_CAST("Commission Rate" AS NUMERIC(10, 5)) AS comm_rate,
         TRY_CAST("Commission Earned" AS NUMERIC(10, 2)) AS comm_earned,
 
-        TO_TIMESTAMP_NTZ("_LOADED_AT", 6) AS loaded_at,
+        TRY_TO_TIMESTAMP("_LOADED_AT") AS loaded_at,
 
         _SOURCE_FILE AS source_file
     FROM source

@@ -3,6 +3,9 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.empty import EmptyOperator
 
+DBT_PROJECT_DIR = "/opt/airflow/code/transform/dbt_project"
+DBT_VENV_CMD = "/opt/dbt_venv/bin/dbt"
+
 default_args = {
     'owner': 'Navier Cracco',
     'depends_on_past': False,
@@ -18,7 +21,7 @@ with DAG(
     schedule_interval='@monthly',
     start_date=datetime(2018, 3, 1),
     catchup=True,
-    tags=['ingest', 'snowflake', 'production']
+    tags=['ingest', 'snowflake', 'production', 'dbt', 'transform']
 ) as dag:
     
     start = EmptyOperator(task_id='start')
@@ -28,6 +31,15 @@ with DAG(
         bash_command='python /opt/airflow/code/extract_load/src/ingest_to_snowflake.py {{ ds }}'
     )
 
+    dbt_build = BashOperator(
+        task_id='dbt_build',
+        bash_command=f"""
+            cd {DBT_PROJECT_DIR} && \
+            {DBT_VENV_CMD} deps && \
+            {DBT_VENV_CMD} build --profiles-dir . --target-path /tmp/dbt_target
+        """
+    )
+
     end = EmptyOperator(task_id='end')
 
-    start >> ingest_to_snowflake >> end
+    start >> ingest_to_snowflake >> dbt_build >> end
