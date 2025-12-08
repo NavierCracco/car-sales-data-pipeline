@@ -48,14 +48,16 @@ def upload_to_snowflake(execution_date_str: str):
             schema=SCHEMA
         )
 
-        success, nchunks, nrows, _ = write_pandas(
+        success, _, nrows, _ = write_pandas(
             conn,
             df,
             TABLE,
             database=DB,
             schema=SCHEMA,
             auto_create_table=True,
-            overwrite=False
+            overwrite=False,
+            chunk_size=100000,
+            bulk_upload_chunks=True
         )
 
         if success:
