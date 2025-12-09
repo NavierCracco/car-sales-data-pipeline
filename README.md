@@ -47,7 +47,11 @@ git clone https://github.com/NavierCracco/car-sales-data-pipeline.git
 cd car-sales-data-pipeline
 ```
 
-2. **Configurar Snowflake**
+2. **Descargar el dataset**
+
+Descarga los archivos CSV desde [Kaggle](https://www.kaggle.com/datasets/flaviocesarsandoval/car-sales-etl) y colócalos en `data_lake/car_sales_data/`.
+
+3. **Configurar Snowflake**
 
 Ejecuta el siguiente script en un Worksheet de Snowflake para preparar el entorno:
 
@@ -62,7 +66,7 @@ CREATE DATABASE IF NOT EXISTS CAR_SALES_DB;
 CREATE SCHEMA IF NOT EXISTS CAR_SALES_DB.RAW;
 ```
 
-3. **Configurar variables de entorno**
+4. **Configurar variables de entorno**
 
 Crear archivo `.env`:
 
@@ -82,14 +86,14 @@ SNOWFLAKE_DATABASE=CAR_SALES_DB
 SNOWFLAKE_SCHEMA=PUBLIC
 ```
 
-4. **Levantar servicios**
+5. **Levantar servicios**
 
 ```bash
 docker compose build
 docker compose up -d
 ```
 
-5. **Acceder a las interfaces**
+6. **Acceder a las interfaces**
 
 - **Airflow**: http://localhost:8080 (admin/admin)
 - **Dashboard**: http://localhost:8501
