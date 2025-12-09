@@ -31,6 +31,9 @@ def load_data():
     base_schema = get_secret("SNOWFLAKE_SCHEMA") or "PUBLIC"
     target_table = f"{base_schema}_MARTS.OBT_CAR_SALES"
 
+    # --- PERFORMANCE OPTIMIZATION
+    # Limit query to the recent 1M records to ensure dashboard responsiveness and prevent memory overload.
+    # For full historical analysis (25M+ rows), direct Snowflake access or Power BI DirectQuery is recommended.
     query = f"SELECT * FROM {target_table} ORDER BY SALE_DATE DESC LIMIT 1000000"
     
     try:
