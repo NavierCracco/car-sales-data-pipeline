@@ -164,10 +164,6 @@ Dashboard con:
 - **Filtros**: Por marca y rango de fechas
 - **Detalle**: Tabla transaccional completa
 
-### Demo
-
-![Dashboard Demo](assets/dashboard-demo.mp4)
-
 ## 🧪 Testing & CI/CD
 
 ### Tests Locales
