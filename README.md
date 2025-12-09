@@ -56,7 +56,7 @@ Descarga los archivos CSV desde [Kaggle](https://www.kaggle.com/datasets/flavioc
 Ejecuta el siguiente script en un Worksheet de Snowflake para preparar el entorno:
 
 ```sql
-USE ROLE SYSADMIN;
+USE ROLE ACCOUNTADMIN;
 
 -- Crear almacén y base de datos
 CREATE WAREHOUSE IF NOT EXISTS COMPUTE_WH WITH WAREHOUSE_SIZE = 'X-SMALL';
@@ -64,6 +64,10 @@ CREATE DATABASE IF NOT EXISTS CAR_SALES_DB;
 
 -- Crear el esquema donde aterrizan los datos
 CREATE SCHEMA IF NOT EXISTS CAR_SALES_DB.RAW;
+
+-- Otorgar permisos a SYSADMIN (opcional)
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE SYSADMIN;
+GRANT ALL ON DATABASE CAR_SALES_DB TO ROLE SYSADMIN;
 ```
 
 4. **Configurar variables de entorno**
